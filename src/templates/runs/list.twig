@@ -23,10 +23,17 @@
                 <input type="text" id="date_end" data-date-format="yyyy-mm-dd" name="date_end" class="datepicker span2" value="{{ search.date_end }}">
             </div>
         </div>
-        <div class="control-group span4">
+        <div class="control-group span3">
             <label class="control-label" for="url">URL</label>
             <div class="controls">
                 <input type="text" id="url" name="url" value="{{ search.url }}">
+            </div>
+        </div>
+        <div class="control-group span3">
+            <label class="control-label" for="correlation_id">CorrelationID</label>
+
+            <div class="controls">
+                <input type="text" id="correlation_id" name="correlation_id" value="{{ search.correlation_id }}">
             </div>
         </div>
         <div class="form-actions">

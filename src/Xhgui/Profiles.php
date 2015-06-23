@@ -47,6 +47,22 @@ class Xhgui_Profiles
     }
 
     /**
+     * Get a single profile run by correlation id.
+     *
+     * @param string $correlationId The correlation id of the profile to get.
+     * @return Xhgui_Profile
+     */
+    public function getByCorrelationId($correlationId) {
+        return $this->_wrap(
+            $this->_collection->findOne(
+                [
+                    'meta.correlation_id' => $correlationId
+                ]
+            )
+        );
+    }
+
+    /**
      * Get the list of profiles for a simplified url.
      *
      * @param string $url The url to load profiles for.
@@ -211,6 +227,9 @@ class Xhgui_Profiles
         }
         if (isset($search['date_end'])) {
             $match['meta.request_date']['$lte'] = (string)$search['date_end'];
+        }
+        if (isset($search['correlation_id'])) {
+            $match['meta.correlation_id'] = (string) $search['correlation_id'];
         }
         $results = $this->_collection->aggregate(array(
             array('$match' => $match),

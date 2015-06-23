@@ -14,7 +14,7 @@ class Xhgui_Controller_Run extends Xhgui_Controller
         $request = $this->_app->request();
 
         $search = array();
-        $keys = array('date_start', 'date_end', 'url');
+        $keys = array('date_start', 'date_end', 'url', 'correlation_id');
         foreach ($keys as $key) {
             if ($request->get($key)) {
                 $search[$key] = $request->get($key);
@@ -64,7 +64,16 @@ class Xhgui_Controller_Run extends Xhgui_Controller
     {
         $request = $this->_app->request();
         $detailCount = $this->_app->config('detail.count');
-        $result = $this->_profiles->get($request->get('id'));
+        $id = $request->get('id');
+        $correlationId = $request->get('correlation_id');
+
+        if ($id) {
+            $result = $this->_profiles->get($id);
+        } else if ($correlationId) {
+            $result = $this->_profiles->getByCorrelationId($correlationId);
+        } else {
+            throw new \InvalidArgumentException('Neither id nor correlation id provided');
+        }
 
         $result->calculateSelf();
 
@@ -107,7 +116,7 @@ class Xhgui_Controller_Run extends Xhgui_Controller
         );
 
         $search = array();
-        $keys = array('date_start', 'date_end', 'limit', 'limit_custom');
+        $keys = array('date_start', 'date_end', 'limit', 'limit_custom', 'correlation_id');
         foreach ($keys as $key) {
             $search[$key] = $request->get($key);
         }
