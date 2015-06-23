@@ -32,7 +32,7 @@ class Xhgui_Controller_Run extends Xhgui_Controller
         $request = $this->app->request();
 
         $search = array();
-        $keys = array('date_start', 'date_end', 'url');
+        $keys = array('date_start', 'date_end', 'url', 'correlation_id');
         foreach ($keys as $key) {
             if ($request->get($key)) {
                 $search[$key] = $request->get($key);
@@ -92,7 +92,12 @@ class Xhgui_Controller_Run extends Xhgui_Controller
 
         $request = $this->app->request();
         $detailCount = $this->app->config('detail.count');
-        $result = $this->searcher->get($request->get('id'));
+        $correlationId = $request->get('correlation_id');
+        if ($correlationId) {
+            $result = $this->searcher->getByCorrelationId($correlationId);
+        } else {
+            $result = $this->searcher->get($request->get('id'));
+        }
 
         $result->calculateSelf();
 
@@ -208,7 +213,7 @@ class Xhgui_Controller_Run extends Xhgui_Controller
         );
 
         $search = array();
-        $keys = array('date_start', 'date_end', 'limit', 'limit_custom');
+        $keys = array('date_start', 'date_end', 'limit', 'limit_custom', 'correlation_id');
         foreach ($keys as $key) {
             $search[$key] = $request->get($key);
         }

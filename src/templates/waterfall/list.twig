@@ -23,13 +23,19 @@
                 <small class="muted">Either unix timestamps or date time string formatted as YYYY-MM-DD H:i:s</small>
             </div>
         </div>
-        <div class="control-group span4">
+        <div class="control-group span3">
             <label class="control-label" for="remote_addr">IP</label>
             <div class="controls">
                 <input type="text" id="remote_addr" name="remote_addr" value="{{ search.remote_addr }}">
             </div>
         </div>
-        <div class="control-group span4">
+        <div class="control-group span3">
+            <label class="control-label" for="correlation_id">CorrelationID</label>
+            <div class="controls">
+                <input type="text" id="correlation_id" name="correlation_id" value="{{ search.correlation_id }}">
+            </div>
+        </div>
+        <div class="control-group span3">
             <label class="control-label" for="cookie">Cookie</label>
             <div class="controls">
                 <input type="text" id="cookie" name="cookie" value="{{ search.cookie }}">
@@ -63,6 +69,7 @@
                   Method
                 </th>
                 <th>URL</th>
+                <th>CorrelationID</th>
                 <th>
                     {{ helpers.sort_link('Time', base_url, 'time', paging, search) }}
                 </th>
@@ -104,6 +111,7 @@
               </a>
             </td>
             <td><a href="{{ url('url.view', {'url': result.meta.url}) }}">{{ result.meta.url }}</a></td>
+            <td><a href="{{ url('run.view', {'correlation_id': result.meta.correlation_id|trim }) }}">{{ result.meta.correlation_id }}</a></td>
             <td><a href="{{ url('run.view', {'id': result.id|trim }) }}">{{ result.date|date(date_format) }}</a></td>
             <td class="right">{{ result.get('main()', 'wt') |as_time }}</td>
             <td class="right">{{ result.get('main()', 'cpu') |as_time }}</td>

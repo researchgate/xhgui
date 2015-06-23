@@ -36,6 +36,16 @@ interface Xhgui_Searcher_Interface
     public function get($id);
 
     /**
+     * Get a single profile run by correlation id.
+     *
+     * @param string $correlationId The correlation id of the profile to get.
+     * @return Xhgui_Profile
+     *
+     * @throws Exception When a profile with the given $correlationId is not found.
+     */
+    public function getByCorrelationId($correlationId);
+
+    /**
      * Get the list of profiles for a simplified url.
      *
      * @param string $url The url to load profiles for.

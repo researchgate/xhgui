@@ -54,6 +54,16 @@ class Xhgui_Searcher_Mongo implements Xhgui_Searcher_Interface
     /**
      * {@inheritdoc}
      */
+    public function getByCorrelationId($correlationId)
+    {
+        return $this->_wrap($this->_collection->findOne(array(
+            'meta.correlation_id' => $correlationId
+        )));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getForUrl($url, $options, $conditions = [])
     {
         $conditions = array_merge(
@@ -153,6 +163,9 @@ class Xhgui_Searcher_Mongo implements Xhgui_Searcher_Interface
         }
         if (isset($search['date_end'])) {
             $match['meta.request_date']['$lte'] = (string)$search['date_end'];
+        }
+        if (isset($search['correlation_id'])) {
+            $match['meta.correlation_id'] = (string)$search['correlation_id'];
         }
         $results = $this->_collection->aggregate(array(
             array('$match' => $match),

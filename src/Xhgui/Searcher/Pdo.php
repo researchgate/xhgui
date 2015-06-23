@@ -118,6 +118,14 @@ class Xhgui_Searcher_Pdo implements Xhgui_Searcher_Interface
     /**
      * {@inheritdoc}
      */
+    public function getByCorrelationId($correlationId)
+    {
+        // TODO: Implement getByCorrelationId() method.
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getForUrl($url, $options, $conditions = array())
     {
         // TODO: Implement getForUrl() method.
@@ -162,7 +170,7 @@ class Xhgui_Searcher_Pdo implements Xhgui_Searcher_Interface
             request_date,
             main_wt,
             main_ct,
-            main_cpu, 
+            main_cpu,
             main_mu,
             main_pmu
           FROM {$this->table}

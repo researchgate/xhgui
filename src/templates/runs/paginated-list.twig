@@ -11,6 +11,7 @@
                   Method
                 </th>
                 <th>URL</th>
+                <th>CorrelationID</th>
                 <th>
                     {{ helpers.sort_link('Time', base_url, 'time', paging, search) }}
                 </th>
@@ -63,10 +64,11 @@
                     {'url': result.meta.simple_url}
                 ) }}
             </td>
+            <td><a href="{{ url('run.view', {'correlation_id': result.meta.correlation_id|trim }) }}">{{ result.meta.correlation_id }}</a></td>
             <td>
               <a href="{{ url('run.view', {'id': result.id|trim }) }}">
                 {{ result.date|date(date_format) }}
-              </a> 
+              </a>
               <a href="{{ url('run.view', {'id': result.id|trim, 'filter': true }) }}">
                 [filter]
               </a>
