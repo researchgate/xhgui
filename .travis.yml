@@ -16,7 +16,7 @@ services:
 
 before_script:
   - pecl install xhprof-beta
-  - echo "extension = mongo.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+  - echo "extension = mongodb.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
   - phpenv rehash
   - composer install --prefer-dist --dev
   - chmod -R 0777 cache/
