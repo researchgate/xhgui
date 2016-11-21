@@ -19,12 +19,13 @@ System Requirements
 
 XHGui has the following requirements:
 
+ * PHP version 5.5 or later.
  * [XHProf](http://pecl.php.net/package/xhprof),
    [Uprofiler](https://github.com/FriendsOfPHP/uprofiler) or
    [Tideways](https://github.com/tideways/php-profiler-extension) to actually profile the data.
- * [MongoDB PHP](http://pecl.php.net/package/mongo) MongoDB PHP driver.
+ * [MongoDB Extension](http://pecl.php.net/package/mongo) MongoDB PHP driver.
    XHGui requires verison 1.3.0 or later.
- * [MongoDB](http://www.mongodb.org/) MongoDB Itself.
+ * [MongoDB](http://www.mongodb.org/) MongoDB Itself. XHGui requires version 2.2.0 or later.
  * [mcrypt](http://php.net/manual/en/book.mcrypt.php) PHP must be configured
    with mcrypt (which is a dependency of Slim).
  * [dom](http://php.net/manual/en/book.dom.php) If you are running the tests
@@ -94,14 +95,14 @@ Configure Webserver Re-Write Rules
 XHGui prefers to have URL rewriting enabled, but will work without it.
 For Apache, you can do the following to enable URL rewriting:
 
-1. Make sure that an .htaccess override is allowed and that AllowOverride is
-   set to All for the correct DocumentRoot.
+1. Make sure that an .htaccess override is allowed and that AllowOverride
+   has the directive FileInfo set for the correct DocumentRoot.
 
     Example configuration for Apache 2.4:
     ```
     <Directory /var/www/xhgui/>
         Options Indexes FollowSymLinks
-        AllowOverride All
+        AllowOverride FileInfo
         Require all granted
     </Directory>
     ```
