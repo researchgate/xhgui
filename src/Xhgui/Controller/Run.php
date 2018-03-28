@@ -210,6 +210,7 @@ class Xhgui_Controller_Run extends Xhgui_Controller
             'direction' => $request->get('direction'),
             'page' => $request->get('page'),
             'perPage' => $this->app->config('page.limit'),
+            'projection' => true,
         );
 
         $search = array();
